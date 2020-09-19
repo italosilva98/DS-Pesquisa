@@ -1,8 +1,8 @@
 .page-container {
     width: 80%;
     margin: 0 auto;
-    margin-bottom: 50px;
-    padding-top: 50px;
+    margin-bottom: 30px;
+    padding-top: 30px;
 }
 
 .filters-container.records-actions {
@@ -57,9 +57,9 @@
     background-color: var(--color-darkslategray);
     display: flex;
     justify-content: space-between;
-    padding: 9px 11px;
-    margin-bottom: 21px;
-    border-radius: 6px;
+    padding: 7px 9px;
+    margin-bottom: 19px;
+    border-radius: 4px;
 }
 
 .filters-container input {
@@ -80,7 +80,7 @@
 
 .filters-container button {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 10px;
     padding: 13px 60px;
 }
