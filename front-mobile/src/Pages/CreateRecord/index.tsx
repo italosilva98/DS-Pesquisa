@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesome5 as Icon } from '@expo/vector-icons';
-import { StyleSheet, View, TextInput, Text, Alert } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import Header from '../../components/Header';
 import PlatformCard from './PlatformCard';
 import { GamePlatform, Game } from './types';
@@ -66,66 +66,67 @@ const CreateRecord = () => {
   return (
     <>
       <Header />
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <TextInput 
+            style={styles.inputText} 
+            placeholder="Nome" 
+            placeholderTextColor="#9E9E9E" 
+            onChangeText={text => setName(text)}
+            value={name}
+            />
+            
+          <TextInput
+            keyboardType="numeric"
+            style={styles.inputText}
+            placeholder="Idade"
+            placeholderTextColor="#9E9E9E"
+            maxLength={3}
+            onChangeText={text => setAge(text)}
+            value={age}
+          />
+          <View style={styles.platformContainer}>
+            <PlatformCard
+              platform="PC"
+              icon="laptop"
+              onChange={handleChangePlatform}
+              activePlatform={platform}
+            />
+            <PlatformCard
+              platform="XBOX"
+              icon="xbox"
+              onChange={handleChangePlatform}
+              activePlatform={platform}
+            />
+            <PlatformCard
+              platform="PLAYSTATION"
+              icon="playstation"
+              onChange={handleChangePlatform}
+              activePlatform={platform}
+            />
+          </View>
+          <RNPickerSelect
+            onValueChange={value => {
+              setSelectedGame(value);
+            }}
+            placeholder={placeholder}
+            value={selectedGame}
+            items={filteredGames}
+            style={pickerSelectStyles}
+            Icon={() => {
+              return <Icon name="chevron-down" color='#9E9E9E' size={25} />
+            }}
 
-      <View style={styles.container}>
-        <TextInput 
-          style={styles.inputText} 
-          placeholder="Nome" 
-          placeholderTextColor="#9E9E9E" 
-          onChangeText={text => setName(text)}
-          value={name}
           />
-          
-        <TextInput
-          keyboardType="numeric"
-          style={styles.inputText}
-          placeholder="Idade"
-          placeholderTextColor="#9E9E9E"
-          maxLength={3}
-          onChangeText={text => setAge(text)}
-          value={age}
-        />
-        <View style={styles.platformContainer}>
-          <PlatformCard
-            platform="PC"
-            icon="laptop"
-            onChange={handleChangePlatform}
-            activePlatform={platform}
-          />
-          <PlatformCard
-            platform="XBOX"
-            icon="xbox"
-            onChange={handleChangePlatform}
-            activePlatform={platform}
-          />
-          <PlatformCard
-            platform="PLAYSTATION"
-            icon="playstation"
-            onChange={handleChangePlatform}
-            activePlatform={platform}
-          />
+          <View style={styles.footer}>
+            <RectButton style={styles.button} onPress={handleSubmit}>
+              <Text style={styles.buttonText}>
+                SALVAR
+              </Text>
+            </RectButton>
+          </View>
         </View>
-        <RNPickerSelect
-          onValueChange={value => {
-            setSelectedGame(value);
-          }}
-          placeholder={placeholder}
-          value={selectedGame}
-          items={filteredGames}
-          style={pickerSelectStyles}
-          Icon={() => {
-            return <Icon name="chevron-down" color='#9E9E9E' size={25} />
-          }}
-
-        />
-        <View style={styles.footer}>
-          <RectButton style={styles.button} onPress={handleSubmit}>
-            <Text style={styles.buttonText}>
-              SALVAR
-            </Text>
-          </RectButton>
-        </View>
-      </View>
+      </TouchableWithoutFeedback>
     </>
   );
 };
